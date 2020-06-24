@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_HOST = "http://localhost:8000";
+console.log("------API_____________API_____________API_____________API-------")
 
 const instance = axios.create({
   timeout: 3000
@@ -22,7 +23,6 @@ const headerGenerator = (Authotization) => {
 export const api = {
   getBoardList: async () => {
     const response = await instance.get(`${API_HOST}/boards`, headerGenerator());
-
     return response.data;
   },
   getUserList: async () => {
@@ -30,10 +30,10 @@ export const api = {
     return response.data.results;
   },
   getLevelList: async () => {
+    console.log("API----------API-----------API");
     const response = await instance.get(`${API_HOST}/levels`, headerGenerator());
     return response.data.results;
-  },
-
+  }
 
 }
 

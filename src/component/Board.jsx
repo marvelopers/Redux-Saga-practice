@@ -4,21 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 export function Board() {
 
   //  load action Call SAGA
-  console.log("");
+  console.log("1. Board.jsx LOAD");
 
   const dispatch = useDispatch();
   const getState = (state) => {
+    console.log("2.getState");
     return state;
   };
   const storeData = useSelector(getState);
-  console.log('storeData', storeData);
+  console.log("3.storeData");
 
   useEffect(() => {
+    console.log("4");
+
     dispatch({ type: "GET_DATA_REQUEST" })
   }, []);
-
-  //saga에서 데이터를 다시 받는당당
-  //data를 받아용!
 
   return (
     <div>
