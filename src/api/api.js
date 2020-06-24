@@ -20,11 +20,12 @@ const headerGenerator = (Authotization) => {
 }
 
 export const api = {
-  getBaordList: async () => {
+  getBoardList: async () => {
     const response = await instance.get(`${API_HOST}/boards`, headerGenerator());
-    return response.data.results;
+
+    return response.data;
   },
-  getuserList: async () => {
+  getUserList: async () => {
     const response = await instance.get(`${API_HOST}/users`, headerGenerator("LOGGED_IN"));
     return response.data.results;
   },
