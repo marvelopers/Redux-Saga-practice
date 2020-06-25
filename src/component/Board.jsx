@@ -4,20 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 export function Board() {
 
   //  load action Call SAGA
-  console.log("1. Board.jsx LOAD");
+  console.log("4. Board.jsx : Board.jsx LOAD");
 
   const dispatch = useDispatch();
   const getState = (state) => {
-    console.log("2.getState");
+    console.log("5. Board.js_dispatch : getState");
     return state;
   };
   const storeData = useSelector(getState);
-  console.log("3.storeData");
+  console.log("6. Board.js_storeData : storeData");
 
   useEffect(() => {
-    console.log("4");
+    console.log("7. Board.js_useEffect : useEffect");
 
     dispatch({ type: "GET_DATA_REQUEST" })
+    console.log("10. Board.js_useEffect_dispach : useEffect");
+
   }, []);
 
   return (

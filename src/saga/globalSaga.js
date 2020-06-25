@@ -5,7 +5,7 @@ import { api } from '../api/api';
 //데이터 request
 function* getDataRequestAction() {
   yield takeEvery("GET_DATA_REQUEST", dataCombineActionSaga);
-  console.log("globalSaga.js/getDataRequestAction : 1. 페이지 로드 후 SAGA ");
+  console.log("3. globalSaga.js/getDataRequestAction : 페이지 로드 후 SAGA ");
 }
 
 
@@ -16,7 +16,7 @@ function* getDataRequestAction() {
 
 
 const combineData = (boardList, userList, levelList) => {
-  console.log("globalSaga.js/combineData : boardList, userList,levelList  ")
+  console.log("11. globalSaga.js/combineData : boardList, userList,levelList  ")
   return boardList.map(
     (board) => {
       return ({
@@ -33,7 +33,7 @@ const combineData = (boardList, userList, levelList) => {
 }
 
 function* dataCombineActionSaga() {
-  console.log("globalSaga.js/dataCombineActionSaga ")
+  console.log("8. globalSaga.js : dataCombineActionSaga ")
 
   const boardList = yield call(api.getBoardList);
 
@@ -44,14 +44,14 @@ function* dataCombineActionSaga() {
 
   const combinedData = combineData(boardList, userList, levelList);
 
-  console.log("globalSaga.js/dataCombineActionSaga || combineData")
+  console.log("12. globalSaga.js/dataCombineActionSaga || combineData")
 
   yield put({ type: "DATA_COMBINE", payload: combinedData });
 }
 
 export function* globalSaga() {
   yield all([
-    console.log("EXPORT globalSaga"),
+    console.log("2. globalSaga.js : EXPORT globalSaga"),
     getDataRequestAction()
   ])
 }

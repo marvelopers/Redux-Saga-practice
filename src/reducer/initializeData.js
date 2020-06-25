@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 export default function dataReducer(state = [], action) {
   switch (action.type) {
     case "DATA_COMBINE":
-      console.log("----------DATA_COMBINE_ACTION_CALLED---------")
+      console.log("13. initialize ----------DATA_COMBINE_ACTION_CALLED---------")
       return [...action.payload];
     default: return state;
   }
