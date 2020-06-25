@@ -1,19 +1,15 @@
 //import { takeEvery } from 'redux-saga';
-import { put, takeEvery, call, all } from "redux-saga/effects";
+import { put, takeEvery, call, all, delay } from "redux-saga/effects";
 import { api } from '../api/api';
 
 //데이터 request
 function* getDataRequestAction() {
+  //loading
+  yield takeEvery("LOAD_REQUEST");
+  yield
   yield takeEvery("GET_DATA_REQUEST", dataCombineActionSaga);
   console.log("3. globalSaga.js/getDataRequestAction : 페이지 로드 후 SAGA ");
 }
-
-
-// //데이터 get
-// function* getDataAction() {
-//   yield takeEvery("GET_DATA", getDataActionSaga);
-// }
-
 
 const combineData = (boardList, userList, levelList) => {
   console.log("11. globalSaga.js/combineData : boardList, userList,levelList  ")
@@ -35,18 +31,23 @@ const combineData = (boardList, userList, levelList) => {
 function* dataCombineActionSaga() {
   console.log("8. globalSaga.js : dataCombineActionSaga ")
 
+  ////////////////////////////////////////////////////////////////////////// 
+  yield put(actSpinner(true));
+
+  yield delay(20000);
+
   const boardList = yield call(api.getBoardList);
-
   const userList = yield call(api.getUserList);
-
   const levelList = yield call(api.getLevelList);
 
-
   const combinedData = combineData(boardList, userList, levelList);
+
 
   console.log("12. globalSaga.js/dataCombineActionSaga || combineData")
 
   yield put({ type: "DATA_COMBINE", payload: combinedData });
+
+  yield put(actSpinner(false));
 }
 
 export function* globalSaga() {

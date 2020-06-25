@@ -3,24 +3,30 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export function Board() {
 
-  //  load action Call SAGA
+
   console.log("4. Board.jsx : Board.jsx LOAD");
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(console.log("USE_DISPATCH"));
   const getState = (state) => {
     console.log("5. Board.js_dispatch : getState");
     return state;
   };
   const storeData = useSelector(getState);
+
+
   console.log("6. Board.js_storeData : storeData");
 
   useEffect(() => {
     console.log("7. Board.js_useEffect : useEffect");
-
+    //  load action Call SAGA
     dispatch({ type: "GET_DATA_REQUEST" })
     console.log("10. Board.js_useEffect_dispach : useEffect");
 
   }, []);
+
+  if (!storeData) {
+    return <div>LOADING</div>
+  }
 
   return (
     <div>
@@ -34,9 +40,12 @@ export function Board() {
           </tr>
         </thead>
         <tbody>
+          {/* {!storeData &&
+            <div>LOADING</div>
+          } */}
           {storeData.map(d => {
             return (
-              <tr>
+              <tr key={d.title}>
                 <td>{d.title}</td>
                 <td>{d.contents}</td>
                 <td>{d.user_name}</td>
