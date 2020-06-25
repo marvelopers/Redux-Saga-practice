@@ -5,7 +5,7 @@ import { api } from '../api/api';
 //데이터 request
 function* getDataRequestAction() {
   yield takeEvery("GET_DATA_REQUEST", dataCombineActionSaga);
-  console.log("globalSaga.js/getDataRequestAction : 1. 페이지 로드 후 SAGA ")
+  console.log("globalSaga.js/getDataRequestAction : 1. 페이지 로드 후 SAGA ");
 }
 
 

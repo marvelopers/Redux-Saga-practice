@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_HOST = "http://localhost:8000";
-console.log("------API_____________API_____________API_____________API-------")
+console.log("1. API CALL API_____________API_____________API_____________API-------")
 
 const instance = axios.create({
   timeout: 3000
