@@ -4,15 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 export function Board() {
 
 
+
   console.log("4. Board.jsx : Board.jsx LOAD");
 
   const dispatch = useDispatch(console.log("USE_DISPATCH"));
-  const getState = (state) => {
+  const getBoardReducerFromStore = (state) => {
     console.log("5. Board.js_dispatch : getState");
-    return state;
+    console.log('state', state);
+    return state.dataReducer;
   };
-  const storeData = useSelector(getState);
-
+  const storeData = useSelector(getBoardReducerFromStore);
 
   console.log("6. Board.js_storeData : storeData");
 

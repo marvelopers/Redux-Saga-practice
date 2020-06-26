@@ -1,8 +1,14 @@
 // import React, { useEffect, useState } from "react";
+import { combineReducers } from "redux";
 
 const loadStatus = {
   actSpinner: false
 }
+
+export const rootReducer = combineReducers({
+  dataReducer,
+  loadReducer
+})
 
 //index.js
 export default function dataReducer(state = [], action) {
@@ -17,6 +23,7 @@ export default function dataReducer(state = [], action) {
 export function loadReducer(state = loadStatus, action) {
   switch (action.type) {
     case "LOADING":
+      console.log("action.payload", action.payload);
       return { ...action.payload };
     default: return state;
   }
