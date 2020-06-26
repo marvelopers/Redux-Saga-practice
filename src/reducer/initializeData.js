@@ -8,7 +8,8 @@ const loadStatus = {
 export const rootReducer = combineReducers({
   dataReducer,
   loadReducer,
-  splitReducer
+  setUserListReducer,
+  setLevelListReducer
 })
 
 //index.js
@@ -30,9 +31,19 @@ export function loadReducer(state = loadStatus, action) {
   }
 }
 
-export function splitReducer(state = [], action) {
+//globalSaga put userList, levelList
+
+export function setUserListReducer(state = [], action) {
   switch (action.type) {
-    case "ADD_LOW":
+    case "SET_USER_DATA":
+      return [...action.payload];
+    default: return state;
+  }
+}
+
+export function setLevelListReducer(state = [], action) {
+  switch (action.type) {
+    case "SET_LEVEL_DATA":
       return [...action.payload];
     default: return state;
   }

@@ -40,8 +40,10 @@ function* dataCombineActionSaga() {
   const boardList = yield call(api.getBoardList);
   console.log("boardList");
   const userList = yield call(api.getUserList);
+  yield put({ type: "SET_USER_DATA", payload: userList });
   console.log("userList");
   const levelList = yield call(api.getLevelList);
+  yield put({ type: "SET_LEVEL_DATA", payload: levelList });
   console.log("levelList");
 
   const combinedData = combineData(boardList, userList, levelList);
@@ -62,17 +64,14 @@ function* dataCombineActionSaga() {
 //데이터 set
 function* setDataRequestAction() {
   //ADD_LOW
-  yield takeEvery("ADD_LOW", dataSplitActionSaga);
+  yield takeEvery("INSERT_DATA", dataSplitActionSaga);
 }
 
 const splitData = () => {
 
 }
 
-const dataSplitActionSaga (){
-
-  const splitedData = splitData();
-
+function* dataSplitActionSaga() {
 
 }
 

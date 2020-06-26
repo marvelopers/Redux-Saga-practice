@@ -1,10 +1,13 @@
 import createSagaMiddleware from 'redux-saga';
 import { globalSaga } from '../saga/globalSaga';
 import { rootReducer } from '../reducer/initializeData';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
 export const getLaodStatusData = (state) => state.loadReducer;
 export const getDataStatusData = (state) => state.dataReducer;
+export const setUserList = (state) => state.setUserListReducer;
+export const setLevelList = (state) => state.setLevelListReducer;
+
 
 console.log("--------------------getLaodStatusData", getDataStatusData);
 
@@ -14,3 +17,5 @@ export const store = createStore(rootReducer, applyMiddleware(saggMiddleWare));
 
 saggMiddleWare.run(globalSaga);
 
+
+//globalSaga put userList, levelList
