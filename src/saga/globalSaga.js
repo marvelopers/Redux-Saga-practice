@@ -1,15 +1,14 @@
-//import { takeEvery } from 'redux-saga';
 import { put, takeEvery, call, all, delay } from "redux-saga/effects";
-// import { actSpinner } from "react-spinners";
 import { api } from '../api/api';
 
 //데이터 request
 function* getDataRequestAction() {
   //loading
-  // yield takeEvery("LOADING");
   yield takeEvery("GET_DATA_REQUEST", dataCombineActionSaga);
   console.log("3. globalSaga.js/getDataRequestAction : 페이지 로드 후 SAGA ");
 }
+
+
 
 const combineData = (boardList, userList, levelList) => {
   console.log("11. globalSaga.js/combineData : boardList, userList,levelList  ")
@@ -31,15 +30,13 @@ const combineData = (boardList, userList, levelList) => {
 function* dataCombineActionSaga() {
   console.log("8. globalSaga.js : dataCombineActionSaga ")
 
-  ////////////////////////////////////////////////////////////////////////// 
-  // yield put({ type: "LOADING", actSpinner: true });
+  //Loading
   yield put({ type: "LOADING", payload: { actSpinner: true } });
-
-  // yield put(actSpinner(true));
 
   yield delay(2000);
   console.log("delay");
 
+  //API data Call
   const boardList = yield call(api.getBoardList);
   console.log("boardList");
   const userList = yield call(api.getUserList);
@@ -47,23 +44,44 @@ function* dataCombineActionSaga() {
   const levelList = yield call(api.getLevelList);
   console.log("levelList");
 
-
   const combinedData = combineData(boardList, userList, levelList);
 
 
   console.log("12. globalSaga.js/dataCombineActionSaga || combineData")
 
+  //conbine data
   yield put({ type: "DATA_COMBINE", payload: combinedData });
 
+  //loading OFF
   yield put({ type: "LOADING", payload: { actSpinner: false } });
 
-  // yield put(actSpinner(false));
 }
+///////////////////////////////////////////////////////////////////
+
+
+//데이터 set
+function* setDataRequestAction() {
+  //ADD_LOW
+  yield takeEvery("ADD_LOW", dataSplitActionSaga);
+}
+
+const splitData = () => {
+
+}
+
+const dataSplitActionSaga (){
+
+  const splitedData = splitData();
+
+
+}
+
 
 
 export function* globalSaga() {
   yield all([
     console.log("2. globalSaga.js : EXPORT globalSaga"),
-    getDataRequestAction()
+    getDataRequestAction(),
+    setDataRequestAction()
   ])
 }

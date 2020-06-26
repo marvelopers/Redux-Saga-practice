@@ -7,7 +7,8 @@ const loadStatus = {
 
 export const rootReducer = combineReducers({
   dataReducer,
-  loadReducer
+  loadReducer,
+  splitReducer
 })
 
 //index.js
@@ -25,6 +26,14 @@ export function loadReducer(state = loadStatus, action) {
     case "LOADING":
       console.log("action.payload", action.payload);
       return { ...action.payload };
+    default: return state;
+  }
+}
+
+export function splitReducer(state = [], action) {
+  switch (action.type) {
+    case "ADD_LOW":
+      return [...action.payload];
     default: return state;
   }
 }
