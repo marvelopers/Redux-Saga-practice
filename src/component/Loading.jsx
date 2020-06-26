@@ -1,27 +1,36 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { SpinnerAction, actSpinner } from 'react-spinners';
+import { createReducer } from '../reducer/initializeData';
 
 export function Loading() {
 
   const dispatch = useDispatch();
   const getState = (state) => {
-    console.log("5. Board.js_dispatch : getState");
+    console.log(">>>Loading.js_dispatch : getState");
     return state;
   };
 
   const storeData = useSelector(getState);
+  //LOAD
+
+  // const initialState = false;
+  // const initState = () => initialState;
+
+  // export const globalSpinnerState = createReducer(initState()).handleAction(actSpinner, (_, action) => action.payload);
+  //////////////////////////
 
   useEffect(() => {
-    //  load action Call SAGA
-    dispatch({ type: "GET_DATA_REQUEST" })
-  }, []);
+    const payload = {
+      actSpinner: false
+    }
+    dispatch({ type: "LOADING", payload });
+  });
 
   return (
-    <div>Loading</div>
+    <div>LOADING</div>
   );
 }
-
-//액션, 리듀서
 
 export default Loading;
 

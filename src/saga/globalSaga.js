@@ -1,12 +1,12 @@
 //import { takeEvery } from 'redux-saga';
 import { put, takeEvery, call, all, delay } from "redux-saga/effects";
+// import { actSpinner } from "react-spinners";
 import { api } from '../api/api';
 
 //데이터 request
 function* getDataRequestAction() {
   //loading
-  yield takeEvery("LOAD_REQUEST");
-  yield
+  // yield takeEvery("LOADING");
   yield takeEvery("GET_DATA_REQUEST", dataCombineActionSaga);
   console.log("3. globalSaga.js/getDataRequestAction : 페이지 로드 후 SAGA ");
 }
@@ -32,13 +32,21 @@ function* dataCombineActionSaga() {
   console.log("8. globalSaga.js : dataCombineActionSaga ")
 
   ////////////////////////////////////////////////////////////////////////// 
-  yield put(actSpinner(true));
+  // yield put({ type: "LOADING", actSpinner: true });
+  yield put({ type: "LOADING", payload: { actSpinner: true } });
 
-  yield delay(20000);
+  // yield put(actSpinner(true));
+
+  yield delay(2000);
+  console.log("delay");
 
   const boardList = yield call(api.getBoardList);
+  console.log("boardList");
   const userList = yield call(api.getUserList);
+  console.log("userList");
   const levelList = yield call(api.getLevelList);
+  console.log("levelList");
+
 
   const combinedData = combineData(boardList, userList, levelList);
 
@@ -47,8 +55,11 @@ function* dataCombineActionSaga() {
 
   yield put({ type: "DATA_COMBINE", payload: combinedData });
 
-  yield put(actSpinner(false));
+  yield put({ type: "LOADING", payload: { actSpinner: false } });
+
+  // yield put(actSpinner(false));
 }
+
 
 export function* globalSaga() {
   yield all([
