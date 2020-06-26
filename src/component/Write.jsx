@@ -20,7 +20,7 @@ export function Board() {
     return state.setLevelListReducer;
   }
   const LevelListData = useSelector(setLevelListfromStore);
-  console.log("**************************", LevelListData);
+  console.log("**************************", LevelListData);;
 
   //userListData===LevelListData 비교해서 데이터 return
 
