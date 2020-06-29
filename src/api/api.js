@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_HOST = "http://localhost:8000";
-console.log("1. api.js : API CALL API_____________API_____________API_____________API-------")
+// console.log("1. api.js : API CALL API_____________API_____________API_____________API-------")
 
 const instance = axios.create({
   timeout: 3000
@@ -16,7 +16,7 @@ const headerGenerator = (Authotization) => {
     header['Authorization'] = Authotization;
   }
 
-  console.log("9. api : API");
+  // console.log("9. api : API");
   return { "headers": header };
 }
 
@@ -30,16 +30,12 @@ export const api = {
     return response.data.results;
   },
   getLevelList: async () => {
-    console.log("11. API----------API-----------API");
+    // console.log("11. API----------API-----------API");
     const response = await instance.get(`${API_HOST}/levels`, headerGenerator());
     return response.data.results;
   },
   createBoard: async (body) => {
     return instance.post(`${API_HOST}/boards`, body);
   }
-
-  // setBoardList: async ({ }) => {
-
-  // }
 }
 

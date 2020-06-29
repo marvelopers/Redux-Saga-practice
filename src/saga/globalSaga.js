@@ -5,13 +5,13 @@ import { api } from '../api/api';
 function* getDataRequestAction() {
   //loading
   yield takeEvery("GET_DATA_REQUEST", dataCombineActionSaga);
-  console.log("3. globalSaga.js/getDataRequestAction : 페이지 로드 후 SAGA ");
+  // console.log("3. globalSaga.js/getDataRequestAction : 페이지 로드 후 SAGA ");
 }
 
 
 
 const combineData = (boardList, userList, levelList) => {
-  console.log("11. globalSaga.js/combineData : boardList, userList,levelList  ")
+  // console.log("11. globalSaga.js/combineData : boardList, userList,levelList  ")
   return boardList.map(
     (board) => {
       return ({
@@ -28,28 +28,24 @@ const combineData = (boardList, userList, levelList) => {
 }
 
 function* dataCombineActionSaga() {
-  console.log("8. globalSaga.js : dataCombineActionSaga ")
+  // console.log("8. globalSaga.js : dataCombineActionSaga ")
 
   //Loading
   yield put({ type: "LOADING", payload: { actSpinner: true } });
 
   // yield delay(2000);
-  console.log("delay");
 
   //API data Call
   const boardList = yield call(api.getBoardList);
-  console.log("boardList");
   const userList = yield call(api.getUserList);
   yield put({ type: "SET_USER_DATA", payload: userList });
-  console.log("userList");
   const levelList = yield call(api.getLevelList);
   yield put({ type: "SET_LEVEL_DATA", payload: levelList });
-  console.log("levelList");
 
   const combinedData = combineData(boardList, userList, levelList);
 
 
-  console.log("12. globalSaga.js/dataCombineActionSaga || combineData")
+  // console.log("12. globalSaga.js/dataCombineActionSaga || combineData")
 
   //conbine data
   yield put({ type: "DATA_COMBINE", payload: combinedData });
@@ -69,8 +65,6 @@ function* insertDataRequestAction() {
 
 
 function* insertDataActionSaga(action) {
-  console.log(action);
-  // const newContentsList = [...contentsList, payload];
   const res = yield call(api.createBoard, action.payload);
   // 통신 종료...
 
@@ -82,7 +76,7 @@ function* insertDataActionSaga(action) {
 
 export function* globalSaga() {
   yield all([
-    console.log("2. globalSaga.js : EXPORT globalSaga"),
+    // console.log("2. globalSaga.js : EXPORT globalSaga"),
     getDataRequestAction(),
     insertDataRequestAction()
   ])

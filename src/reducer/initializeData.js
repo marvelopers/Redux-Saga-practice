@@ -18,15 +18,6 @@ export default function dataReducer(state = [], action) {
     case "DATA_COMBINE":
       console.log("13. initialize ----------DATA_COMBINE_ACTION_CALLED---------")
       return [...action.payload];
-    // case "INSERT_DATA":
-    //   console.log("action.type!", action.payload);
-    //   // console.log("action.payload.newHomedata", action.payload.newHomeData);
-    //   const newState = {
-    //     ...state,
-    //     payload: {
-    //     }
-    //   }
-    //   return newState;
     default: return state;
   }
 }

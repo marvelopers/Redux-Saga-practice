@@ -5,23 +5,22 @@ export function Board() {
 
 
 
-  console.log("4. Board.jsx : Board.jsx LOAD");
+  // console.log("4. Board.jsx : Board.jsx LOAD");
 
-  const dispatch = useDispatch(console.log("USE_DISPATCH"));
+  const dispatch = useDispatch();
   const getBoardReducerFromStore = (state) => {
-    console.log("5. Board.js_dispatch : getState");
-    // console.log('state', state);
+    // console.log("5. Board.js_dispatch : getState");
     return state.dataReducer;
   };
   const storeData = useSelector(getBoardReducerFromStore);
 
-  console.log("6. Board.js_storeData : storeData");
+  // console.log("6. Board.js_storeData : storeData");
 
   useEffect(() => {
-    console.log("7. Board.js_useEffect : useEffect");
+    // console.log("7. Board.js_useEffect : useEffect");
     //  load action Call SAGA
     dispatch({ type: "GET_DATA_REQUEST" })
-    console.log("10. Board.js_useEffect_dispach : useEffect");
+    // console.log("10. Board.js_useEffect_dispach : useEffect");
 
   }, []);
 
@@ -41,12 +40,9 @@ export function Board() {
           </tr>
         </thead>
         <tbody>
-          {/* {!storeData &&
-            <div>LOADING</div>
-          } */}
           {storeData.map(d => {
             return (
-              <tr key={d.title}>
+              <tr key={d.key}>
                 <td>{d.title}</td>
                 <td>{d.contents}</td>
                 <td>{d.user_name}</td>

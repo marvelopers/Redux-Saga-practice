@@ -5,17 +5,7 @@ export function Board() {
 
   const dispatch = useDispatch();
   const dataList = useSelector(state => state.dataReducer);
-
   const [levelText, setLevelText] = useState('');
-
-  // const userDe = (state) => {
-  //   return state.user
-  // }
-
-  // const userUser = useSelector(userDe);
-
-  // const userDe = useSelector(state => state.user);
-  // console.log("USER___", userUser);
   const [data, setData] = useState({
     title: '',
     contents: '',
@@ -23,45 +13,19 @@ export function Board() {
   });
 
 
+  /////////////////////getListfromStore////////////////////////
 
   const setUserListfromStore = (state) => {
-    console.log("state", state);
+    // console.log("state", state);
     //dataReducer
     return state.setUserListReducer;
   }
   const userListData = useSelector(setUserListfromStore);
 
-  console.log("##########################", userListData);
-
-
-
-  ///////////////////////////////////////////////////////////////////////////
   const setLevelListfromStore = (state) => {
     return state.setLevelListReducer;
   }
   const LevelListData = useSelector(setLevelListfromStore);
-  console.log("**************************", LevelListData);
-
-
-
-  // const submit = () => {
-
-  //   //db에 전송될 데이터
-  //   const content = {
-  //     ...payload,
-  //     createAt : new Date(),
-  //     updateAt : new Date()
-  //   }
-
-  //   //기존의 데이터와 새로운 데이터를 결합하는 방법
-  //   const newContentsList = [...contentsList, payload];
-
-  //   //Array를 String으로 변환해서 set
-  //   localStorage.setItem('contentsList', JSON.stringify(newContentsList));
-  //   setContentsList(newContentsList);
-
-  // }
-
 
   /////////////////////EventHanbler////////////////////////
 
@@ -80,23 +44,17 @@ export function Board() {
   }
 
   const onInsert = () => {
-    console.log('data', data);
-    console.log("dataList", dataList);
     const payload = {
       key: "board" + Number(Math.max.apply(null, dataList.map(e => parseInt(e.key.split("board")[1], 10))) + 1),
       title: data.title,
       contents: data.contents,
       user: data.user,
     }
-    console.log("PAYLOADPAYLOADPAYLOADPAYLOAD", Math.max.apply(null, dataList.map(e => e.key)) + 1);
-    console.log(payload.key);
     dispatch({
       type: "INSERT_DATA",
       payload: payload
     })
   }
-
-
 
   return (
     <div>
