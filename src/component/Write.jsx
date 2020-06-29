@@ -27,6 +27,7 @@ export function Board() {
   }
   const LevelListData = useSelector(setLevelListfromStore);
 
+
   /////////////////////EventHanbler////////////////////////
 
   const hanbleChangeTitle = (e) => {
@@ -43,17 +44,31 @@ export function Board() {
     })
   }
 
-  const onInsert = () => {
-    const payload = {
-      key: "board" + Number(Math.max.apply(null, dataList.map(e => parseInt(e.key.split("board")[1], 10))) + 1),
-      title: data.title,
-      contents: data.contents,
-      user: data.user,
+  const onInsert = ({ match }) => {
+    if (match) {
+      const payload = {
+        key: match.params.key,
+        title: data.title,
+        contents: data.contents,
+        user: data.user,
+      }
+      dispatch({
+        type: "UPDATE_DATA",
+        payload: payload
+      })
+    } else {
+      const payload = {
+        key: "board" + Number(Math.max.apply(null, dataList.map(e => parseInt(e.key.split("board")[1], 10))) + 1),
+        title: data.title,
+        contents: data.contents,
+        user: data.user,
+      }
+      dispatch({
+        type: "INSERT_DATA",
+        payload: payload
+      })
+
     }
-    dispatch({
-      type: "INSERT_DATA",
-      payload: payload
-    })
   }
 
   return (

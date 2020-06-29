@@ -9,7 +9,8 @@ export const rootReducer = combineReducers({
   dataReducer,
   loadReducer,
   setUserListReducer,
-  setLevelListReducer
+  setLevelListReducer,
+  setRowReducer
 })
 
 //index.js
@@ -50,4 +51,12 @@ export function setLevelListReducer(state = [], action) {
   }
 }
 
+//rowList 함수
+export function setRowReducer(state = [], action) {
+  switch (action.type) {
+    case "SET_ROW_DATA":
+      return { ...action.payload }
+    default: return state;
+  }
+}
 

@@ -14,7 +14,7 @@ export function Board() {
   };
   const storeData = useSelector(getBoardReducerFromStore);
 
-  // console.log("6. Board.js_storeData : storeData");
+  console.log("6. Board.js_storeData : storeData", storeData);
 
   useEffect(() => {
     // console.log("7. Board.js_useEffect : useEffect");
@@ -23,6 +23,28 @@ export function Board() {
     // console.log("10. Board.js_useEffect_dispach : useEffect");
 
   }, []);
+
+
+
+
+
+  const RowInfo = storeData.find((state) => state.key === modalStoreData.cardId);
+
+  //List Click
+
+  const listClick = (key) => {
+
+    const payload = {
+      key: storeData.key,
+      title: storeData.title,
+      contents: storeData.contents,
+      user: storeData.user
+    }
+
+    dispatch({ type: 'SET_ROW_DATA', payload: payload })
+  }
+
+
 
   if (!storeData) {
     return <div>LOADING</div>
@@ -42,7 +64,7 @@ export function Board() {
         <tbody>
           {storeData.map(d => {
             return (
-              <tr key={d.key}>
+              <tr key={d.key} onClick={() => { listClick(d.key) }}>
                 <td>{d.title}</td>
                 <td>{d.contents}</td>
                 <td>{d.user_name}</td>
