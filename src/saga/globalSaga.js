@@ -33,7 +33,7 @@ function* dataCombineActionSaga() {
   //Loading
   yield put({ type: "LOADING", payload: { actSpinner: true } });
 
-  yield delay(2000);
+  // yield delay(2000);
   console.log("delay");
 
   //API data Call

@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
 
 export function Board() {
 
   const dispatch = useDispatch();
   const dataList = useSelector(state => state.dataReducer);
+  const [levelText, setLevelText] = useState('');
 
   const setUserListfromStore = (state) => {
     return state.setUserListReducer;
   }
   const userListData = useSelector(setUserListfromStore);
 
-  console.log("##########################", userListData)
+  console.log("##########################", userListData);
+
 
 
   ///////////////////////////////////////////////////////////////////////////
@@ -22,19 +23,9 @@ export function Board() {
   const LevelListData = useSelector(setLevelListfromStore);
   console.log("**************************", LevelListData);;
 
-  //userListData===LevelListData 비교해서 데이터 return
 
 
   const [data, setdata] = useState(dataList);
-
-  // useEffect(() =>
-  //   console.log("7. Board.js_useEffect : useEffect");
-  //   //  load action Call SAGA
-  //   dispatch({ type: "GET_DATA_REQUEST" })
-  //   console.log("10. Board.js_useEffect_dispach : useEffect");
-
-  // }, []);
-
 
   const onInsert = (e) => {
     dispatch({
@@ -45,8 +36,6 @@ export function Board() {
       }
     })
   }
-  //stored의 userList에서 
-  //user_Level
 
 
   /////////////////////EventHanbler////////////////////////
@@ -98,12 +87,23 @@ export function Board() {
               ></input>
             </td>
             <td>
-              <select option={() => userListData} ></select>
+              <select onChange={(e) => {
+                // userListData===LevelListData 비교해서 데이터 return
+                const value = e.currentTarget.value;
+                if (value) {
+                  const selectedLevel = userListData.find(user => user.key === value).level;
+                  const levelText = LevelListData.find(level => level.level === selectedLevel).text;
+                  setLevelText(levelText);
+                } else {
+                  setLevelText("");
+                }
+              }}>
+                <option value="">유저를 선택해주세요</option>
+                {userListData.map(user => <option value={user.key}>{user.name}</option>)}
+              </select>
             </td>
             <td>
-              <input
-                value={level_text}
-              ></input>
+              {levelText}
             </td>
             <td><button onClick={onInsert}>추가</button></td>
           </tr>
