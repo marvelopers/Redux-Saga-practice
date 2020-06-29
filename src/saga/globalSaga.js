@@ -62,16 +62,19 @@ function* dataCombineActionSaga() {
 
 
 //데이터 set
-function* setDataRequestAction() {
-  //ADD_LOW
-  yield takeEvery("INSERT_DATA", dataSplitActionSaga);
+function* insertDataRequestAction() {
+  //INSERT_DATA
+  yield takeEvery("INSERT_DATA", insertDataActionSaga);
 }
 
-const splitData = () => {
 
-}
+function* insertDataActionSaga(action) {
+  console.log(action);
+  // const newContentsList = [...contentsList, payload];
+  const res = yield call(api.createBoard, action.payload);
+  // 통신 종료...
 
-function* dataSplitActionSaga() {
+  yield put({ type: "GET_DATA_REQUEST" });
 
 }
 
@@ -81,6 +84,6 @@ export function* globalSaga() {
   yield all([
     console.log("2. globalSaga.js : EXPORT globalSaga"),
     getDataRequestAction(),
-    setDataRequestAction()
+    insertDataRequestAction()
   ])
 }

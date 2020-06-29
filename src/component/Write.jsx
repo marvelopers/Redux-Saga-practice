@@ -5,9 +5,28 @@ export function Board() {
 
   const dispatch = useDispatch();
   const dataList = useSelector(state => state.dataReducer);
+
   const [levelText, setLevelText] = useState('');
 
+  // const userDe = (state) => {
+  //   return state.user
+  // }
+
+  // const userUser = useSelector(userDe);
+
+  // const userDe = useSelector(state => state.user);
+  // console.log("USER___", userUser);
+  const [data, setData] = useState({
+    title: '',
+    contents: '',
+    user: ''
+  });
+
+
+
   const setUserListfromStore = (state) => {
+    console.log("state", state);
+    //dataReducer
     return state.setUserListReducer;
   }
   const userListData = useSelector(setUserListfromStore);
@@ -21,42 +40,62 @@ export function Board() {
     return state.setLevelListReducer;
   }
   const LevelListData = useSelector(setLevelListfromStore);
-  console.log("**************************", LevelListData);;
+  console.log("**************************", LevelListData);
 
 
 
-  const [data, setdata] = useState(dataList);
+  // const submit = () => {
 
-  const onInsert = (e) => {
-    dispatch({
-      type: "INSERT_DATA",
-      payload: {
-        title: data.title,
-        content: data.content
-      }
-    })
-  }
+  //   //db에 전송될 데이터
+  //   const content = {
+  //     ...payload,
+  //     createAt : new Date(),
+  //     updateAt : new Date()
+  //   }
+
+  //   //기존의 데이터와 새로운 데이터를 결합하는 방법
+  //   const newContentsList = [...contentsList, payload];
+
+  //   //Array를 String으로 변환해서 set
+  //   localStorage.setItem('contentsList', JSON.stringify(newContentsList));
+  //   setContentsList(newContentsList);
+
+  // }
 
 
   /////////////////////EventHanbler////////////////////////
 
   const hanbleChangeTitle = (e) => {
-    setdata({
+    setData({
       ...data,
       title: e.target.value
     })
   }
 
   const hanbleChangeContent = (e) => {
-    setdata({
+    setData({
       ...data,
-      content: e.target.content
+      contents: e.target.value
     })
   }
 
-  const level_text = () => {
-
+  const onInsert = () => {
+    console.log('data', data);
+    console.log("dataList", dataList);
+    const payload = {
+      key: "board" + Number(Math.max.apply(null, dataList.map(e => parseInt(e.key.split("board")[1], 10))) + 1),
+      title: data.title,
+      contents: data.contents,
+      user: data.user,
+    }
+    console.log("PAYLOADPAYLOADPAYLOADPAYLOAD", Math.max.apply(null, dataList.map(e => e.key)) + 1);
+    console.log(payload.key);
+    dispatch({
+      type: "INSERT_DATA",
+      payload: payload
+    })
   }
+
 
 
   return (
@@ -87,15 +126,25 @@ export function Board() {
               ></input>
             </td>
             <td>
-              <select onChange={(e) => {
+              <select value={data.user} onChange={(e) => {
+
                 // userListData===LevelListData 비교해서 데이터 return
                 const value = e.currentTarget.value;
+
                 if (value) {
                   const selectedLevel = userListData.find(user => user.key === value).level;
                   const levelText = LevelListData.find(level => level.level === selectedLevel).text;
                   setLevelText(levelText);
+                  setData({
+                    ...data,
+                    user: value
+                  });
                 } else {
                   setLevelText("");
+                  setData({
+                    ...data,
+                    user: ""
+                  });
                 }
               }}>
                 <option value="">유저를 선택해주세요</option>

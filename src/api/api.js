@@ -33,7 +33,13 @@ export const api = {
     console.log("11. API----------API-----------API");
     const response = await instance.get(`${API_HOST}/levels`, headerGenerator());
     return response.data.results;
+  },
+  createBoard: async (body) => {
+    return instance.post(`${API_HOST}/boards`, body);
   }
 
+  // setBoardList: async ({ }) => {
+
+  // }
 }
 

@@ -10,7 +10,7 @@ export function Board() {
   const dispatch = useDispatch(console.log("USE_DISPATCH"));
   const getBoardReducerFromStore = (state) => {
     console.log("5. Board.js_dispatch : getState");
-    console.log('state', state);
+    // console.log('state', state);
     return state.dataReducer;
   };
   const storeData = useSelector(getBoardReducerFromStore);
