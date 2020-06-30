@@ -73,11 +73,39 @@ function* insertDataActionSaga(action) {
 }
 
 
+/////////////////////////update////////////////////////////////
+
+function* getRowDataRequestAction() {
+  //getRowData
+  yield takeEvery("GET_ROW_DATA", getRowDataActionSaga);
+}
+
+function* getRowDataActionSaga() {
+
+
+}
+
+
+/////////////////////////delelte////////////////////////////////
+
+function* delRowDataRequestAction() {
+  //getRowData
+  yield takeEvery("DEL_ROW_DATA", delRowDataActionSaga);
+}
+
+function* delRowDataActionSaga(action) {
+  const res = yield call(api.deleteBoard, action.payload);
+  console.log("del");
+  yield put({ type: "GET_DATA_REQUEST", });
+  // 통신 종료...
+}
 
 export function* globalSaga() {
   yield all([
     // console.log("2. globalSaga.js : EXPORT globalSaga"),
     getDataRequestAction(),
-    insertDataRequestAction()
+    insertDataRequestAction(),
+    getRowDataRequestAction(),
+    delRowDataRequestAction
   ])
 }

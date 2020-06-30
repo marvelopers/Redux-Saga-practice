@@ -36,6 +36,13 @@ export const api = {
   },
   createBoard: async (body) => {
     return instance.post(`${API_HOST}/boards`, body);
+  },
+  updateBoard: async (body) => {
+    return instance.post(`${API_HOST}/boards`, body);
+  },
+  deleteBoard: async (body) => {
+    return instance.post(`${API_HOST}/boards`, body);
   }
+
 }
 

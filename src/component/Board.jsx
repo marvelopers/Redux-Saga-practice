@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 
 export function Board() {
 
@@ -26,22 +27,39 @@ export function Board() {
 
 
 
-
-
-  const RowInfo = storeData.find((state) => state.key === modalStoreData.cardId);
-
   //List Click
 
+  const [selectedKey, setSelectedKey] = useState({
+    key: '',
+    title: '',
+    contents: '',
+    user_name: '',
+    level_text: ''
+  })
+
+  //setSelectedIndex
   const listClick = (key) => {
 
-    const payload = {
-      key: storeData.key,
-      title: storeData.title,
-      contents: storeData.contents,
-      user: storeData.user
-    }
+    console.log()
+    //키가 일치하는 값의 데이터를 불러온다. 
+    // selectedKey(key);
+    console.log("**************selectedKey(key)", key);
 
-    dispatch({ type: 'SET_ROW_DATA', payload: payload })
+    // const RowInfo = storeData.find((key) => key === storeData.key)
+
+    // const payload = {
+    //   key: storeData.key,
+    //   title: storeData.title,
+    //   contents: storeData.contents,
+    //   user: storeData.user
+    // }
+
+    // dispatch({ type: 'GET_ROW_DATA', payload: payload })
+  }
+
+
+  const onClickDelete = (key) => {
+    dispatch({ type: 'DEL_ROW_DATA', key: key })
   }
 
 
@@ -49,6 +67,7 @@ export function Board() {
   if (!storeData) {
     return <div>LOADING</div>
   }
+
 
   return (
     <div>
@@ -64,11 +83,17 @@ export function Board() {
         <tbody>
           {storeData.map(d => {
             return (
-              <tr key={d.key} onClick={() => { listClick(d.key) }}>
+              <tr key={d.key} onClick={() => {
+                listClick(d.key);
+              }}>
                 <td>{d.title}</td>
                 <td>{d.contents}</td>
                 <td>{d.user_name}</td>
                 <td>{d.level_text}</td>
+                <td><button onClick={(e) => {
+                  e.stopPropagation();
+                  onClickDelete(d.key);
+                }}>삭제</button></td>
               </tr>
             )
           })}

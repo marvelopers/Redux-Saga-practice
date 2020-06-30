@@ -10,6 +10,7 @@ export const rootReducer = combineReducers({
   loadReducer,
   setUserListReducer,
   setLevelListReducer,
+  getRowReducer,
   setRowReducer
 })
 
@@ -51,7 +52,19 @@ export function setLevelListReducer(state = [], action) {
   }
 }
 
-//rowList 함수
+///////////////////////////////////////////////////////////////
+
+//uopdate rowList 함수
+//Click이 발생하면 데이터를 가져와서 write 칸에 뿌린다. 
+export function getRowReducer(state = [], action) {
+  switch (action.type) {
+    case "GET_ROW_DATA":
+      return { ...action.payload }
+    default: return state;
+  }
+}
+
+//추가를 누르면 업데이트 내역을 List에 보낸다. 
 export function setRowReducer(state = [], action) {
   switch (action.type) {
     case "SET_ROW_DATA":

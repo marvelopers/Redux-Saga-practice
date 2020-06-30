@@ -16,7 +16,6 @@ export function Board() {
   /////////////////////getListfromStore////////////////////////
 
   const setUserListfromStore = (state) => {
-    // console.log("state", state);
     //dataReducer
     return state.setUserListReducer;
   }
