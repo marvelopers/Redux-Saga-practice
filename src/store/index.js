@@ -5,8 +5,9 @@ import { createStore, applyMiddleware } from 'redux';
 
 export const getLaodStatusData = (state) => state.loadReducer;
 export const getDataStatusData = (state) => state.dataReducer;
-export const setUserList = (state) => state.setUserListReducer;
-export const setLevelList = (state) => state.setLevelListReducer;
+export const getRowData = (state) => state.getRowReducer;
+export const getUserList = (state) => state.setUserListReducer;
+export const getLevelList = (state) => state.setLevelListReducer;
 
 
 console.log("--------------------getLaodStatusData", getDataStatusData);

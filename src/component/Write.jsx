@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getRowData, getLevelList, getUserList } from "../store";
+
+
 
 export function Board() {
 
   const dispatch = useDispatch();
+
   const dataList = useSelector(state => state.dataReducer);
+  const userListData = useSelector(getUserList);
+  const LevelListData = useSelector(getLevelList);
+  const selectedKey = useSelector(getRowData);
+
   const [levelText, setLevelText] = useState('');
   const [data, setData] = useState({
     title: '',
@@ -12,22 +20,30 @@ export function Board() {
     user: ''
   });
 
+  const updateKey = selectedKey.key;
 
-  /////////////////////getListfromStore////////////////////////
+  const listClick = (updateKey) => {
 
-  const setUserListfromStore = (state) => {
-    //dataReducer
-    return state.setUserListReducer;
+    const listKey = (data) => {
+      return data.key === updateKey
+    }
+    const selectList = dataList.find(listKey);
+
+    console.log("selectList", selectList);
+    const payload = {
+      key: dataList.key,
+      title: dataList.title,
+      contents: dataList.contents,
+      user_name: dataList.user_name,
+      level_text: dataList.level_text
+    }
+
+    console.log(payload, "payload");
   }
-  const userListData = useSelector(setUserListfromStore);
-
-  const setLevelListfromStore = (state) => {
-    return state.setLevelListReducer;
-  }
-  const LevelListData = useSelector(setLevelListfromStore);
 
 
-  /////////////////////EventHanbler////////////////////////
+  /////////////////////eventhandler////////////////////////
+
 
   const hanbleChangeTitle = (e) => {
     setData({

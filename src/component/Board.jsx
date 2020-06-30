@@ -36,31 +36,27 @@ export function Board() {
     user_name: '',
     level_text: ''
   })
+    ;  //setSelectedIndex
+  const listClick = (selectkey) => {
+    dispatch({ type: 'GET_ROW_DATA', payload: { key: selectkey } });
 
-  //setSelectedIndex
-  const listClick = (key) => {
+    // const listKey = (data) => {
+    //   return data.key === selectkey
+    // }
+    // const selectList = storeData.find(listKey);
 
-    console.log()
-    //키가 일치하는 값의 데이터를 불러온다. 
-    // selectedKey(key);
-    console.log("**************selectedKey(key)", key);
-
-    // const RowInfo = storeData.find((key) => key === storeData.key)
-
-    const payload = {
-      key: "",
-      title: "",
-      contents: "",
-      user: ""
-    }
-
-    dispatch({ type: 'GET_ROW_DATA', payload: payload })
+    // const payload = {
+    //   key: selectList.key,
+    //   title: selectList.title,
+    //   contents: selectList.contents,
+    //   user_name: selectList.user_name,
+    //   level_text: selectList.level_text
+    // }
+    // dispatch({ type: 'GET_ROW_DATA', payload: payload })
   }
 
 
   const onClickDelete = (selectkey) => {
-    console.log("BOARD");
-    console.log(selectkey);
     dispatch({ type: 'DEL_ROW_DATA', payload: { key: selectkey } });
   }
 

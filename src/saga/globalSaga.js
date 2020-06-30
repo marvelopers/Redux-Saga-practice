@@ -1,6 +1,8 @@
 import { put, takeEvery, call, all, delay } from "redux-saga/effects";
 import { api } from '../api/api';
 
+//서버통신
+
 //데이터 request
 function* getDataRequestAction() {
   //loading
@@ -75,12 +77,14 @@ function* insertDataActionSaga(action) {
 
 /////////////////////////update////////////////////////////////
 
-function* getRowDataRequestAction() {
+//값 변경
+function* updateDataRequestAction() {
   //getRowData
-  yield takeEvery("GET_ROW_DATA", getRowDataActionSaga);
+  yield takeEvery("UPDATE_DATA", updateDataActionSaga);
 }
 
-function* getRowDataActionSaga(action) {
+function* updateDataActionSaga(action) {
+  console.log("ACTION", action);
   const res = yield call(api.updateBoard, action.payload);
   yield put({ type: "GET_DATA_REQUEST" });
 }
@@ -104,7 +108,7 @@ export function* globalSaga() {
     // console.log("2. globalSaga.js : EXPORT globalSaga"),
     getDataRequestAction(),
     insertDataRequestAction(),
-    getRowDataRequestAction(),
-    delRowDataRequestAction()
+    delRowDataRequestAction(),
+    updateDataRequestAction()
   ])
 }
