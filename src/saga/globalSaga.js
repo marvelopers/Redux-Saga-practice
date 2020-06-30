@@ -80,9 +80,9 @@ function* getRowDataRequestAction() {
   yield takeEvery("GET_ROW_DATA", getRowDataActionSaga);
 }
 
-function* getRowDataActionSaga() {
-
-
+function* getRowDataActionSaga(action) {
+  const res = yield call(api.updateBoard, action.payload);
+  yield put({ type: "GET_DATA_REQUEST" });
 }
 
 
@@ -95,8 +95,7 @@ function* delRowDataRequestAction() {
 
 function* delRowDataActionSaga(action) {
   const res = yield call(api.deleteBoard, action.payload);
-  console.log("del");
-  yield put({ type: "GET_DATA_REQUEST", });
+  yield put({ type: "GET_DATA_REQUEST" });
   // 통신 종료...
 }
 
@@ -106,6 +105,6 @@ export function* globalSaga() {
     getDataRequestAction(),
     insertDataRequestAction(),
     getRowDataRequestAction(),
-    delRowDataRequestAction
+    delRowDataRequestAction()
   ])
 }

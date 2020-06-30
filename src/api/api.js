@@ -20,6 +20,7 @@ const headerGenerator = (Authotization) => {
   return { "headers": header };
 }
 
+
 export const api = {
   getBoardList: async () => {
     const response = await instance.get(`${API_HOST}/boards`, headerGenerator());
@@ -38,10 +39,10 @@ export const api = {
     return instance.post(`${API_HOST}/boards`, body);
   },
   updateBoard: async (body) => {
-    return instance.post(`${API_HOST}/boards`, body);
+    return instance.patch(`${API_HOST}/boards`, { data: body });
   },
   deleteBoard: async (body) => {
-    return instance.post(`${API_HOST}/boards`, body);
+    return instance.delete(`${API_HOST}/boards`, { data: body });
   }
 
 }

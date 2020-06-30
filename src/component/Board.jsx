@@ -47,19 +47,21 @@ export function Board() {
 
     // const RowInfo = storeData.find((key) => key === storeData.key)
 
-    // const payload = {
-    //   key: storeData.key,
-    //   title: storeData.title,
-    //   contents: storeData.contents,
-    //   user: storeData.user
-    // }
+    const payload = {
+      key: "",
+      title: "",
+      contents: "",
+      user: ""
+    }
 
-    // dispatch({ type: 'GET_ROW_DATA', payload: payload })
+    dispatch({ type: 'GET_ROW_DATA', payload: payload })
   }
 
 
-  const onClickDelete = (key) => {
-    dispatch({ type: 'DEL_ROW_DATA', key: key })
+  const onClickDelete = (selectkey) => {
+    console.log("BOARD");
+    console.log(selectkey);
+    dispatch({ type: 'DEL_ROW_DATA', payload: { key: selectkey } });
   }
 
 
