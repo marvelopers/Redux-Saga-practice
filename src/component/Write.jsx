@@ -13,6 +13,8 @@ export function Board() {
   const LevelListData = useSelector(getLevelList);
   const selectedKey = useSelector(getRowData);
 
+  const updateKey = selectedKey.key;
+
   const [levelText, setLevelText] = useState('');
   const [data, setData] = useState({
     title: '',
@@ -20,25 +22,37 @@ export function Board() {
     user: ''
   });
 
-  const updateKey = selectedKey.key;
+  //console.log('updateKey====>', updateKey);
+  useEffect(() => {
+    console.log('updateKey==>', updateKey);
+    if (updateKey) {
+      console.log("=>", dataList.find((data) => data.key === updateKey));
+      const existData = getSelectedBoard(updateKey);
+      setData("existData", existData);
+      const selectedLevel = userListData.find(user => user.key === existData.user).level;
+      const levelText = LevelListData.find(level => level.level === selectedLevel).text;
+      if (!levelText) {
+        setLevelText("");
+      } else {
+        setLevelText(levelText);
+      }
+    }
+  }, [updateKey]);
 
-  const listClick = (updateKey) => {
+  function getSelectedBoard(updateKey) {
 
     const listKey = (data) => {
       return data.key === updateKey
     }
     const selectList = dataList.find(listKey);
 
-    console.log("selectList", selectList);
-    const payload = {
-      key: dataList.key,
-      title: dataList.title,
-      contents: dataList.contents,
-      user_name: dataList.user_name,
-      level_text: dataList.level_text
+    if (selectList) {
+      return { title: selectList.title, contents: selectList.contents, user: selectList.user }
+    } else {
+      return { title: '', contents: '', user: '' }
     }
 
-    console.log(payload, "payload");
+
   }
 
 
