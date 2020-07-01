@@ -24,9 +24,7 @@ export function Board() {
 
   //console.log('updateKey====>', updateKey);
   useEffect(() => {
-    console.log('updateKey==>', updateKey);
     if (updateKey) {
-      console.log("=>", dataList.find((data) => data.key === updateKey));
       const existData = getSelectedBoard(updateKey);
       setData(existData);
       if (!userListData.find(user => user.key === existData.user)) {
