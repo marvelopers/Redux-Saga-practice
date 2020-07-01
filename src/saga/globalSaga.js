@@ -84,7 +84,7 @@ function* updateDataRequestAction() {
 }
 
 function* updateDataActionSaga(action) {
-  console.log("ACTION", action);
+  console.log("&&&&&&&&&&ACTION", action);
   const res = yield call(api.updateBoard, action.payload);
   yield put({ type: "GET_DATA_REQUEST" });
 }
