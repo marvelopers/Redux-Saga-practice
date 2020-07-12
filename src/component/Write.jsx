@@ -24,14 +24,16 @@ export function Board() {
 
   //console.log('updateKey====>', updateKey);
   useEffect(() => {
+    console.log('updateKey==>', updateKey);
     if (updateKey) {
+      console.log("=>", dataList.find((data) => data.key === updateKey));
       const existData = getSelectedBoard(updateKey);
-      setData(existData);
-      if (!userListData.find(user => user.key === existData.user)) {
+      setData("existData", existData);
+      const selectedLevel = userListData.find(user => user.key === existData.user).level;
+      const levelText = LevelListData.find(level => level.level === selectedLevel).text;
+      if (!levelText) {
         setLevelText("");
       } else {
-        const selectedLevel = userListData.find(user => user.key === existData.user).level;
-        const levelText = LevelListData.find(level => level.level === selectedLevel).text;
         setLevelText(levelText);
       }
     }
@@ -71,8 +73,8 @@ export function Board() {
     })
   }
 
-  const onInsert = () => {
-    console.log("updateKeyupdateKeyupdateKey", updateKey);
+  const onInsert = (updateKey) => {
+    console.log("MATCH", updateKey);
     if (updateKey) {
       const payload = {
         key: updateKey,
@@ -128,6 +130,7 @@ export function Board() {
             </td>
             <td>
               <select value={data.user} onChange={(e) => {
+
                 // userListData===LevelListData 비교해서 데이터 return
                 const value = e.currentTarget.value;
 

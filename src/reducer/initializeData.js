@@ -58,6 +58,7 @@ export function setLevelListReducer(state = [], action) {
 export function getRowReducer(state = [], action) {
   switch (action.type) {
     case "GET_ROW_DATA":
+      console.log("GET_ROW_DATA reducer", { ...action.payload });
       return { ...action.payload }
     default: return state;
   }

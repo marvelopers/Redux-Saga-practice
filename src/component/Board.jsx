@@ -38,6 +38,7 @@ export function Board() {
   })
     ;  //setSelectedIndex
   const listClick = (selectkey) => {
+
     dispatch({ type: 'GET_ROW_DATA', payload: { key: selectkey } });
 
     // const listKey = (data) => {
@@ -67,6 +68,9 @@ export function Board() {
   }
 
 
+  console.log("-----> ", storeData)
+
+
   return (
     <div>
       <table>
@@ -82,6 +86,7 @@ export function Board() {
           {storeData.map(d => {
             return (
               <tr key={d.key} onClick={() => {
+                console.log("------------> ", d.key)
                 listClick(d.key);
               }}>
                 <td>{d.title}</td>
