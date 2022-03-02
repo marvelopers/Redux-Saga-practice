@@ -22,7 +22,7 @@
     "redux-saga": "^1.1.3",
     "safe-buffer": "^5.2.1",
     "ssri": "^8.0.1",
-    "url-parse": "^1.5.3",
+    "url-parse": "^1.5.9",
     "websocket-extensions": "^0.1.4"
   },
   "scripts": {
